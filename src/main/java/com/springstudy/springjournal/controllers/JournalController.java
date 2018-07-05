@@ -9,18 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class JournalController {
 
+
     private JournalRepository repo;
+
+    public JournalController(@Autowired JournalRepository repo) {
+        this.repo = repo;
+    }
 
     public JournalRepository getRepo() {
         return repo;
     }
 
-    @Autowired
     public void setRepo(JournalRepository repo) {
         this.repo = repo;
     }
 
-    @RequestMapping("{/")
+
+    @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("journal",repo.findAll());
         return "index";
